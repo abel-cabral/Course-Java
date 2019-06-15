@@ -1,8 +1,10 @@
 package application;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Program {
@@ -12,17 +14,21 @@ public class Program {
 		File homedir = new File(System.getProperty("user.home"));
 		File path = new File(homedir, "qualquer.txt");
 
-		// Declara variavel no try
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			String line = br.readLine();
-			while (line != null) {
-				System.out.println(line);
-				line = br.readLine();
+		String[] toppings = new String[3];
+		toppings[0] = "Regina Casé";
+		toppings[1] = "Samira Close";
+		toppings[2] = "Queiroz de Mattos";
+		
+		// Criando e salvando dados em arquivo - Ira gravar no final da linha
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
+			for( String c : toppings) {
+				bw.write(c);
+				bw.newLine(); // Quebra de linha
 			}
 		} catch (IOException e) {
-			// Java 7 > o fechamento é automatico no bloco try/cath
-			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
 		}
+		
 
 	}
 
