@@ -9,10 +9,8 @@ public class Teacher {
 	public Teacher() {	
 	}
 
-	public void addClass(String className, Integer studentCode) {
-		Course initCourse = new Course(className);
-		initCourse.addStudent(new Student(studentCode));
-		sets.add(initCourse);
+	public void addClass(Course course) {		
+		sets.add(course);
 	}
 	
 	public int amountStudents() {
@@ -30,5 +28,30 @@ public class Teacher {
 
 	public Set<Course> getSets() {
 		return sets;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sets == null) ? 0 : sets.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Teacher other = (Teacher) obj;
+		if (sets == null) {
+			if (other.sets != null)
+				return false;
+		} else if (!sets.equals(other.sets))
+			return false;
+		return true;
 	}	
 }
